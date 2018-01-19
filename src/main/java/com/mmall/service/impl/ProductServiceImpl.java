@@ -18,6 +18,7 @@ import com.mmall.util.PropertiesUtil;
 import com.mmall.vo.ProductDetailVo;
 import com.mmall.vo.ProductListVo;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -133,6 +134,10 @@ public class ProductServiceImpl implements IProductService {
 
         List<ProductListVo> productListVoList = Lists.newArrayList();
         for(Product productItem : productList){
+            // 这里可以用属性拷贝的方式进行
+/*            ProductListVo productListVo = new ProductListVo();
+            productListVo.setImageHost(PropertiesUtil.getProperty("ftp.server.http.prefix","http://img.happymmall.com/"));
+            BeanUtils.copyProperties(productItem,productListVo);*/
             ProductListVo productListVo = assembleProductListVo(productItem);
             productListVoList.add(productListVo);
         }

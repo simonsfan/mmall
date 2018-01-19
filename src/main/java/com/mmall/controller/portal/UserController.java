@@ -100,6 +100,7 @@ public class UserController {
     @RequestMapping(value = "reset_password.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> resetPassword(HttpSession session,String passwordOld,String passwordNew){
+        //这个方法多次被调用，可以封装在父类里面在controller继承方便调用
         User user = (User)session.getAttribute(Const.CURRENT_USER);
         if(user == null){
             return ServerResponse.createByErrorMessage("用户未登录");

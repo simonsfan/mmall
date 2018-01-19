@@ -34,12 +34,11 @@ public class FTPUtil {
         return result;
     }
 
-
     private boolean uploadFile(String remotePath,List<File> fileList) throws IOException {
         boolean uploaded = true;
         FileInputStream fis = null;
         //连接FTP服务器
-        if(connectServer(this.ip,this.port,this.user,this.pwd)){
+        if(connectServer(this.ip,this.user,this.pwd)){
             try {
                 ftpClient.changeWorkingDirectory(remotePath);
                 ftpClient.setBufferSize(1024);
@@ -50,7 +49,6 @@ public class FTPUtil {
                     fis = new FileInputStream(fileItem);
                     ftpClient.storeFile(fileItem.getName(),fis);
                 }
-
             } catch (IOException e) {
                 logger.error("上传文件异常",e);
                 uploaded = false;
@@ -65,7 +63,7 @@ public class FTPUtil {
 
 
 
-    private boolean connectServer(String ip,int port,String user,String pwd){
+    private boolean connectServer(String ip,String user,String pwd){
 
         boolean isSuccess = false;
         ftpClient = new FTPClient();
@@ -77,16 +75,6 @@ public class FTPUtil {
         }
         return isSuccess;
     }
-
-
-
-
-
-
-
-
-
-
 
     private String ip;
     private int port;
