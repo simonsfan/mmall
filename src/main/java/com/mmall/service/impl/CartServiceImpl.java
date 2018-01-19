@@ -98,20 +98,6 @@ public class CartServiceImpl implements ICartService {
         return ServerResponse.createBySuccess(cartMapper.selectCartProductCount(userId));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private CartVo getCartVoLimit(Integer userId){
         CartVo cartVo = new CartVo();
         List<Cart> cartList = cartMapper.selectCartByUserId(userId);
