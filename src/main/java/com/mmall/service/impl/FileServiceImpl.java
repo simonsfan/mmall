@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 /**
- * Created by geely
+ * Created by simonsfan
  */
 @Service("iFileService")
 public class FileServiceImpl implements IFileService {
@@ -24,7 +24,6 @@ public class FileServiceImpl implements IFileService {
     public String upload(MultipartFile file,String path){
         String fileName = file.getOriginalFilename();
         //扩展名
-        //abc.jpg
         String fileExtensionName = fileName.substring(fileName.lastIndexOf(".")+1);
         String uploadFileName = UUID.randomUUID().toString()+"."+fileExtensionName;
         logger.info("开始上传文件,上传文件的文件名:{},上传的路径:{},新文件名:{}",fileName,path,uploadFileName);
@@ -35,7 +34,6 @@ public class FileServiceImpl implements IFileService {
             fileDir.mkdirs();
         }
         File targetFile = new File(path,uploadFileName);
-
 
         try {
             file.transferTo(targetFile);
@@ -49,9 +47,7 @@ public class FileServiceImpl implements IFileService {
             logger.error("上传文件异常",e);
             return null;
         }
-        //A:abc.jpg
-        //B:abc.jpg
-        return targetFile.getName();
+        return targetFile.getName();    // 返回上传到服务器后的文件名
     }
 
 }

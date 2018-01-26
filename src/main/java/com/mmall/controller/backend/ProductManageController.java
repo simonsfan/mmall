@@ -11,6 +11,7 @@ import com.mmall.service.IProductService;
 import com.mmall.service.IUserService;
 import com.mmall.util.PropertiesUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +25,14 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
- * Created by geely
+ * Created by simonsfan
  */
 
 @Controller
 @RequestMapping("/manage/product")
 public class ProductManageController {
+
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(ProductManageController.class);
 
     @Autowired
     private IUserService iUserService;
@@ -118,7 +121,7 @@ public class ProductManageController {
         }
     }
 
-    /**
+    /**   后期功能需兼容  多文件同时上传
      * springmvc文件上传
      *
      * @param session
@@ -134,7 +137,7 @@ public class ProductManageController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录,请登录管理员");
         }
         if(iUserService.checkAdminRole(user).isSuccess()){
-            String path = request.getSession().getServletContext().getRealPath("upload");
+            String path = request.getSession().getServletContext().getRealPath("upload"); //      /develop/apache-tomcat-7.0.82/webapps/ROOT/upload
             String targetFileName =  iFileService.upload(file,path);
             String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFileName;
 

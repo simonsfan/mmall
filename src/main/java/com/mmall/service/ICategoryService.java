@@ -6,7 +6,7 @@ import com.mmall.pojo.Category;
 import java.util.List;
 
 /**
- * Created by geely
+ * Created by simonsfan
  */
 public interface ICategoryService {
     ServerResponse addCategory(String categoryName, Integer parentId);
