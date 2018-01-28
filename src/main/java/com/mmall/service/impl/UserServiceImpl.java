@@ -96,6 +96,14 @@ public class UserServiceImpl implements IUserService {
         return ServerResponse.createByErrorMessage("找回密码的问题是空的");
     }
 
+    /**
+     * 校验找回密码问题答案正确就加入token，关联到下个（重置密码）功能，那时候是取token检验
+     *
+     * @param username
+     * @param question
+     * @param answer
+     * @return
+     */
     public ServerResponse<String> checkAnswer(String username,String question,String answer){
         int resultCount = userMapper.checkAnswer(username,question,answer);
         if(resultCount>0){
